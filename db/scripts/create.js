@@ -19,5 +19,5 @@ await pool.query(
   'Create table if not exists signUp (signUp_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, code INT, patient_email TEXT, used BOOLEAN);'
 );
 await pool.query(
-  'Create table if not exists patient (patient_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, firstName text, surname TEXT, title TEXT, address TEXT, pregnant BOOLEAN, dob TEXT, gender TEXT, gpSurgery TEXT, nhsNumber INT, phoneNumber INT, postcode TEXT, email TEXT, prepaid TEXT); '
+  'Create table if not exists patient (patient_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, firstName text, surname TEXT, title TEXT, address TEXT, pregnant BOOLEAN, dob TEXT, gender TEXT, gpSurgery TEXT, nhsNumber INT, phoneNumber INT, postcode TEXT, email TEXT, prepaid TEXT, weight number); '
 );
