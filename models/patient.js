@@ -7,20 +7,29 @@ export async function getPatients() {
 }
 
 //gets all details for a certain patient by email
-export async function getPatientByEmail(email) {
+export async function getPatientsByDoctor(email) {
   const res = await pool.query(
-    'SELECT * FROM patient WHERE email = $1 RETURNING*;',
+    'SELECT * FROM patient WHERE patient_id = any (select unnest(patients) from doctor where email=$1);',
     [email]
   );
+  console.log(res.rows);
+
+  return res.rows;
+}
+
+export async function getPatientByEmail(email) {
+  const res = await pool.query('SELECT * FROM patient WHERE email = $1;', [
+    email,
+  ]);
+  console.log(res.rows);
   return res.rows;
 }
 
 //gets all details for a certain patient by id
 export async function getPatientById(patient_id) {
-  const res = await pool.query(
-    'SELECT * FROM patient WHERE patient_id = $1 RETURNING*;',
-    [patient_id]
-  );
+  const res = await pool.query('SELECT * FROM patient WHERE patient_id = $1;', [
+    patient_id,
+  ]);
   return res.rows;
 }
 

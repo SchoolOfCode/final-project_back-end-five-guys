@@ -6,7 +6,7 @@ import {
   makeAllergy,
 } from '../models/allergy.js';
 import { getSignUps, newSignUp, linkSignUp } from '../models/signUp.js';
-import { getPatients } from '../models/patient.js';
+import { getPatients, getPatientsByDoctor } from '../models/patient.js';
 const router = express.Router();
 
 /* GET users listing. */
@@ -27,6 +27,11 @@ router.get('/signup', async function (req, res, next) {
   res.json({ success: true, data: response });
 });
 router.get('/patients', async function (req, res, next) {
+  if (req.query.doctoremail !== undefined) {
+    console.log('doc email provided');
+    const response = await getPatientsByDoctor(req.query.doctoremail);
+    return res.json({ success: true, data: response });
+  }
   const response = await getPatients();
   res.json({ success: true, data: response });
 });
