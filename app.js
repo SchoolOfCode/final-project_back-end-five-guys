@@ -11,6 +11,7 @@ import cors from "cors";
 const app = express();
 const PORT = 3001;
 // app.use('/', indexRouter);
+
 app.use(cors());
 app.use(logger("dev"));
 
