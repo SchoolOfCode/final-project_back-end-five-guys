@@ -73,7 +73,7 @@ router.post('/patients', async function (req, res, next) {
       doctorID[0].doctor_id,
       newPatient[0].patient_id
     );
-    return res.json({ success: true, data: addedPatient });
+    return res.json({ success: true, doc: addedPatient, patient: newPatient });
   }
   res.json({ success: false, data: {} });
 });
