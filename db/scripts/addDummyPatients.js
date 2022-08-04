@@ -1,4 +1,6 @@
-export const dummyPatientData = [
+import pool from "../index.js";
+
+const dummyPatientData = [
   {
     firstName: "Roger",
     surname: "Smith",
@@ -13,6 +15,7 @@ export const dummyPatientData = [
     postcode: "B91 7QY",
     email: "rsmith123@email.com",
     prepaid: "2022-09-01",
+    weight: 100,
   },
   {
     firstName: "Victoria",
@@ -28,6 +31,7 @@ export const dummyPatientData = [
     postcode: "B91 7QY",
     email: "vickismith@email.com",
     prepaid: "2022-09-01",
+    weight: 150,
   },
   {
     firstName: "Katie",
@@ -43,6 +47,7 @@ export const dummyPatientData = [
     postcode: "B21 9UI",
     email: "katielefoe@email.com",
     prepaid: "2022-07-01",
+    weight: 50,
   },
 ];
 
@@ -80,3 +85,29 @@ export const dummyPrescriptionData = [
     status: "in use",
   },
 ];
+async function populatePatient(patients) {
+  for (let i = 0; i < patients.length; i++) {
+    let res = await pool.query(
+      "insert into patient (firstname,surname,title,email, address, pregnant,dob,gender,gpsurgery,nhsnumber,phonenumber,postcode,prepaid,weight) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) returning *",
+      [
+        patients[i].firstName,
+        patients[i].surname,
+        patients[i].title,
+        patients[i].email,
+        patients[i].address,
+        patients[i].pregnant,
+        patients[i].dob,
+        patients[i].gender,
+        patients[i].gpSurgery,
+        patients[i].nhsNumber,
+        patients[i].phoneNumber,
+        patients[i].postcode,
+        patients[i].prepaid,
+        patients[i].weight,
+      ]
+    );
+    console.log(res.rows);
+  }
+}
+
+populatePatient(dummyPatientData);
