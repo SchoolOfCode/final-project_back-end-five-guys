@@ -7,6 +7,7 @@ import {
 } from '../models/allergy.js';
 import { getSignUps, newSignUp, linkSignUp } from '../models/signUp.js';
 import { getPatients, getPatientsByDoctor } from '../models/patient.js';
+import { getPrescriptionsById } from '../models/prescription.js';
 const router = express.Router();
 
 /* GET users listing. */
@@ -18,7 +19,12 @@ router.get('/diary', async function (req, res, next) {
   const response = await getDiary();
   res.json({ success: true, data: response });
 });
-router.get('/allergy', async function (req, res, next) {
+router.get('/allergy/:id', async function (req, res, next) {
+  if (req.params.id) {
+    console.log('id given for allergies');
+    const response = await getAllergiesById(Number(req.params.id));
+    return res.json({ success: true, data: response });
+  }
   const response = await getAllergies();
   res.json({ success: true, data: response });
 });
@@ -35,5 +41,8 @@ router.get('/patients', async function (req, res, next) {
   const response = await getPatients();
   res.json({ success: true, data: response });
 });
-
+router.get('/prescriptions/:id', async function (req, res, next) {
+  const response = await getPrescriptionsById(Number(req.params.id));
+  res.json({ success: true, data: response });
+});
 export default router;
