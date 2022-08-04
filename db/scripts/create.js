@@ -5,7 +5,7 @@ await pool.query(
 );
 
 await pool.query(
-  'Create table if not exists prescription (prescription_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, patient_id INT, name TEXT, reason TEXT, total NUMERIC, frequency TEXT, dosage NUMERIC, date TEXT, active BOOLEAN, measurement TEXT, monitoring BOOLEAN, monitoringSchedule NUMERIC, override TEXT, quantity NUMERIC, status TEXT);'
+  'Create table if not exists prescription (prescription_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, patient_id INT, name TEXT, reason TEXT, total NUMERIC, frequency TEXT, dosage NUMERIC, date TEXT, active BOOLEAN, measurement TEXT, monitoring BOOLEAN, monitoringSchedule NUMERIC, monitoringFrequency TEXT, override TEXT, quantity NUMERIC, status TEXT);'
 );
 
 await pool.query(
