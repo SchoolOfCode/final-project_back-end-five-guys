@@ -12,6 +12,11 @@ import {
   getPatientsByDoctor,
 } from '../models/patient.js';
 import { getPrescriptionsById } from '../models/prescription.js';
+import {
+  getDoctorByEmail,
+  getDoctorById,
+  addPatientToDoctorList,
+} from '../models/doctor.js';
 const router = express.Router();
 
 /* GET users listing. */
@@ -62,7 +67,13 @@ router.post('/patients', async function (req, res, next) {
     console.log('email given for post for new patient');
     const newPatient = await createPatient(req.body);
     console.log(newPatient);
-    return res.json({ success: true, data: response });
+    const doctorID = await getDoctorByEmail(req.query.doctoremail);
+    console.log(doctorID);
+    const addedPatient = await addPatientToDoctorList(
+      doctorID[0].doctor_id,
+      newPatient[0].patient_id
+    );
+    return res.json({ success: true, data: addedPatient });
   }
   res.json({ success: false, data: {} });
 });

@@ -36,9 +36,10 @@ export async function getPatientById(patient_id) {
 //create patient
 export async function createPatient(patient) {
   const res = await pool.query(
-    'INSERT INTO patient (firstName, surname, title, address, pregnant, dob, gender, gpSurgery, nhsNumber, phoneNumber, postcode, email, weight) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING*;',
+    'INSERT INTO patient (firstName, ethnicity, surname, title, address, pregnant, dob, gender, gpSurgery, nhsNumber, phoneNumber, postcode, email, weight) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING*;',
     [
       patient.firstName,
+      patient.ethnicity,
       patient.surname,
       patient.title,
       patient.address,
