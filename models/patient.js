@@ -1,7 +1,16 @@
 import pool from "../db/index.js";
 
-//gets all details for a certain patient
-export async function getPatient(patient_id) {
+//gets all details for a certain patient by email
+export async function getPatientByEmail(email) {
+  const res = await pool.query(
+    "SELECT * FROM patient WHERE email = $1 RETURNING*;",
+    [email]
+  );
+  return res.rows;
+}
+
+//gets all details for a certain patient by id
+export async function getPatientById(patient_id) {
   const res = await pool.query(
     "SELECT * FROM patient WHERE patient_id = $1 RETURNING*;",
     [patient_id]
