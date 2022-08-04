@@ -45,3 +45,38 @@ export const dummyPatientData = [
     prepaid: "2022-07-01",
   },
 ];
+
+export const dummyPrescriptionData = [
+  {
+    patient_id: 1,
+    name: "simvastatin",
+    reason: "lower cholesterol",
+    total: 14,
+    frequency: "twice a day",
+    dosage: 2,
+    date: "2022-08-04",
+    active: true,
+    measurement: "mg",
+    monitoring: true,
+    monitoringSchedule: 4,
+    override: "Need to lose weight",
+    quantity: 300,
+    status: "paused",
+  },
+  {
+    patient_id: 1,
+    name: "apixaban",
+    reason: "prevent blood clots",
+    total: 14,
+    frequency: "twice a day",
+    dosage: 2,
+    date: "2022-08-04",
+    active: true,
+    measurement: "mg",
+    monitoring: true,
+    monitoringSchedule: 4,
+    override: "Patient has clotting issue",
+    quantity: 100,
+    status: "in use",
+  },
+];
