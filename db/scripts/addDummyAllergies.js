@@ -23,12 +23,11 @@ let allergies = [
 ];
 
 async function populateAllergies(allergies) {
-  for (let i = 0; i < patients.length; i++) {
-    let res = await pool.query('insert into patient (first returning *', [
-      patients[i].firstName,
-      patients[i].surname,
-      patients[i].title,
-    ]);
+  for (let i = 0; i < allergies.length; i++) {
+    let res = await pool.query(
+      'insert into allergy (patient_id,name,reaction) values ($1,$2,$3) returning *',
+      [allergies[i].patient_id, allergies[i].name, allergies[i].reaction]
+    );
     console.log(res.rows);
   }
 }
