@@ -1,9 +1,15 @@
-import pool from "../db/index.js";
+import pool from '../db/index.js';
+
+//gets all details
+export async function getPatients() {
+  const res = await pool.query('SELECT * FROM patient;');
+  return res.rows;
+}
 
 //gets all details for a certain patient by email
 export async function getPatientByEmail(email) {
   const res = await pool.query(
-    "SELECT * FROM patient WHERE email = $1 RETURNING*;",
+    'SELECT * FROM patient WHERE email = $1 RETURNING*;',
     [email]
   );
   return res.rows;
@@ -12,7 +18,7 @@ export async function getPatientByEmail(email) {
 //gets all details for a certain patient by id
 export async function getPatientById(patient_id) {
   const res = await pool.query(
-    "SELECT * FROM patient WHERE patient_id = $1 RETURNING*;",
+    'SELECT * FROM patient WHERE patient_id = $1 RETURNING*;',
     [patient_id]
   );
   return res.rows;
@@ -21,7 +27,7 @@ export async function getPatientById(patient_id) {
 //create patient
 export async function createPatient(patient) {
   const res = await pool.query(
-    "INSERT INTO patient (firstName, surname, title, address, pregnant, dob, gender, gpSurgery, nhsNumber, phoneNumber, postcode, email, weight) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING*;",
+    'INSERT INTO patient (firstName, surname, title, address, pregnant, dob, gender, gpSurgery, nhsNumber, phoneNumber, postcode, email, weight) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING*;',
     [
       patient.firstName,
       patient.surname,
@@ -44,7 +50,7 @@ export async function createPatient(patient) {
 //update patient weight
 export async function updatePatientWeight(patient, weight) {
   const res = await pool.query(
-    "UPDATE patient SET weight = $1 WHERE patient_id = $2 RETURNING*;",
+    'UPDATE patient SET weight = $1 WHERE patient_id = $2 RETURNING*;',
     [weight, patient]
   );
 
@@ -54,7 +60,7 @@ export async function updatePatientWeight(patient, weight) {
 //update patient prepaid date
 export async function updatePatientPrepaid(patient, prepaid) {
   const res = await pool.query(
-    "UPDATE patient SET prepaid = $1 WHERE patient_id = $2 RETURNING*;",
+    'UPDATE patient SET prepaid = $1 WHERE patient_id = $2 RETURNING*;',
     [prepaid, patient]
   );
 
@@ -64,7 +70,7 @@ export async function updatePatientPrepaid(patient, prepaid) {
 //delete patient
 export async function deletePatient(patient) {
   const res = await pool.query(
-    "DELETE FROM patient WHERE patient_id = $1 RETURNING*;",
+    'DELETE FROM patient WHERE patient_id = $1 RETURNING*;',
     [patient]
   );
   return res.rows;
@@ -73,7 +79,7 @@ export async function deletePatient(patient) {
 //update patient details
 export async function updatePatient(patient) {
   const res = await pool.query(
-    "UPDATE patient SET firstName=$1, surname=$2, title=$3, address=$4, pregnant=$5, dob=$6, gender=$7, gpSurgery=$8, nhsNumber=$9, phoneNumber=$10, postcode=$11, email=$12, weight=$13 RETURNING*;",
+    'UPDATE patient SET firstName=$1, surname=$2, title=$3, address=$4, pregnant=$5, dob=$6, gender=$7, gpSurgery=$8, nhsNumber=$9, phoneNumber=$10, postcode=$11, email=$12, weight=$13 RETURNING*;',
     [
       patient.firstName,
       patient.surname,
