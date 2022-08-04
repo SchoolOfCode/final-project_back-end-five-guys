@@ -9,7 +9,7 @@ await pool.query(
 );
 
 await pool.query(
-  'Create table if not exists doctor (doctor_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, patients INT [], name TEXT, email INT, gp_surgery TEXT); '
+  'Create table if not exists doctor (doctor_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, patients INT [], name TEXT, email TEXT, gp_surgery TEXT); '
 );
 
 await pool.query(
