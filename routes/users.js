@@ -6,7 +6,11 @@ import {
   makeAllergy,
 } from '../models/allergy.js';
 import { getSignUps, newSignUp, linkSignUp } from '../models/signUp.js';
-import { getPatients, getPatientsByDoctor } from '../models/patient.js';
+import {
+  createPatient,
+  getPatients,
+  getPatientsByDoctor,
+} from '../models/patient.js';
 import { getPrescriptionsById } from '../models/prescription.js';
 const router = express.Router();
 
@@ -52,6 +56,15 @@ router.get('/patients', async function (req, res, next) {
   }
   const response = await getPatients();
   res.json({ success: true, data: response });
+});
+router.post('/patients', async function (req, res, next) {
+  if (req.query.doctoremail) {
+    console.log('email given for post for new patient');
+    const newPatient = await createPatient(req.body);
+    console.log(newPatient);
+    return res.json({ success: true, data: response });
+  }
+  res.json({ success: false, data: {} });
 });
 router.get('/prescriptions/:id', async function (req, res, next) {
   const response = await getPrescriptionsById(Number(req.params.id));
