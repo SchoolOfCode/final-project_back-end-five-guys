@@ -59,7 +59,7 @@ const dummyPrescriptionData = [
 async function populatePresciption(items) {
   for (let i = 0; i < items.length; i++) {
     let res = await pool.query(
-      'insert into allergy (patient_id,name,reason,total,frequency,dosage,date,type,measurement,monitoring,monitoringFrequency,monitoringSchedule,override,quantity,status) values($1, $2, $3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) returning * ',
+      'insert into prescription (patient_id,name,reason,total,frequency,dosage,date,type,measurement,monitoring,monitoringFrequency,monitoringSchedule,override,quantity,status) values($1, $2, $3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) returning * ',
       [
         items[i].patient_id,
         items[i].name,
