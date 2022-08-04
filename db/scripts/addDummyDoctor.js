@@ -1,6 +1,6 @@
 import pool from '../index.js';
 let doctor = {
-  patients: [],
+  patients: [1, 2, 3],
   name: 'Ben Snuggles',
   email: 'bens@gmail.com',
   gpSurgey: 'Happy Health',
