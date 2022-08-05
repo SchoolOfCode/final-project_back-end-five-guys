@@ -16,8 +16,10 @@ import { getSignUps, newSignUp, linkSignUp } from "../models/signUp.js";
 
 import {
   createPatient,
+  getPatientByEmail,
   getPatients,
   getPatientsByDoctor,
+  updatePatientPrepaid,
 } from "../models/patient.js";
 import { getPrescriptionsById } from "../models/prescription.js";
 import {
@@ -118,4 +120,12 @@ router.get("/prescriptions/:id", async function (req, res, next) {
   const response = await getPrescriptionsById(Number(req.params.id));
   res.json({ success: true, data: response });
 });
+
+router.get("/patient", async function (req, res, next) {
+  if (req.query.email) {
+    const response = await getPatientByEmail(req.query.email);
+    res.json({ success: true, data: response });
+  }
+});
+
 export default router;
