@@ -1,10 +1,10 @@
-import express from 'express';
-import { getDiary, getDiaryById, newDiaryEntry } from '../models/diary.js';
+import express from "express";
+import { getDiary, getDiaryById, newDiaryEntry } from "../models/diary.js";
 import {
   getAllergies,
   getAllergiesById,
   makeAllergy,
-} from '../models/allergy.js';
+} from "../models/allergy.js";
 import { getSignUps, newSignUp, linkSignUp } from '../models/signUp.js';
 import {
   createPatient,
@@ -20,11 +20,11 @@ import {
 const router = express.Router();
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-  res.send('Home page not in use');
+router.get("/", function (req, res, next) {
+  res.send("Home page not in use");
 });
 
-router.get('/diary', async function (req, res, next) {
+router.get("/diary", async function (req, res, next) {
   const response = await getDiary();
   res.json({ success: true, data: response });
 });
@@ -40,28 +40,38 @@ router.post('/diary/:id', async function (req, res, next) {
   const response = await newDiaryEntry(Number(req.params.id), req.body);
   return res.json({ success: true, data: response });
 });
-router.get('/allergy/:id', async function (req, res, next) {
+
+router.get("/allergy/:id", async function (req, res, next) {
+
   if (req.params.id) {
-    console.log('id given for allergies');
+    console.log("id given for allergies");
     const response = await getAllergiesById(Number(req.params.id));
     return res.json({ success: true, data: response });
   }
   const response = await getAllergies();
   res.json({ success: true, data: response });
 });
-router.get('/signup', async function (req, res, next) {
+
+//add allergy for patient
+router.post("/allergy/:id", async function (req, res, next) {
+  const response = await makeAllergy(Number(req.params.id), req.body);
+  return res.json({ success: true, data: response });
+});
+
+router.get("/signup", async function (req, res, next) {
   const response = await getSignUps();
   res.json({ success: true, data: response });
 });
-router.get('/patients', async function (req, res, next) {
+router.get("/patients", async function (req, res, next) {
   if (req.query.doctoremail !== undefined) {
-    console.log('doc email provided');
+    console.log("doc email provided");
     const response = await getPatientsByDoctor(req.query.doctoremail);
     return res.json({ success: true, data: response });
   }
   const response = await getPatients();
   res.json({ success: true, data: response });
 });
+
 router.post('/patients', async function (req, res, next) {
   if (req.query.doctoremail) {
     console.log('email given for post for new patient');
