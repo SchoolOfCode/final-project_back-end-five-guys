@@ -16,6 +16,7 @@ const dummyPatientData = [
     email: 'rsmith123@email.com',
     prepaid: '2022-09-01',
     weight: 100,
+    ethnicity: 'Irish',
   },
   {
     firstName: 'Victoria',
@@ -32,6 +33,7 @@ const dummyPatientData = [
     email: 'vickismith@email.com',
     prepaid: '2022-09-01',
     weight: 150,
+    ethnicity: 'Romanian',
   },
   {
     firstName: 'Katie',
@@ -48,15 +50,17 @@ const dummyPatientData = [
     email: 'katielefoe@email.com',
     prepaid: '2022-07-01',
     weight: 50,
+    ethnicity: 'white',
   },
 ];
 
 async function populatePatient(patients) {
   for (let i = 0; i < patients.length; i++) {
     let res = await pool.query(
-      'insert into patient (firstname,surname,title,email, address, pregnant,dob,gender,gpsurgery,nhsnumber,phonenumber,postcode,prepaid,weight) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) returning *',
+      'insert into patient (firstname, ethnicity, surname,title,email, address, pregnant,dob,gender,gpsurgery,nhsnumber,phonenumber,postcode,prepaid,weight) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) returning *',
       [
         patients[i].firstName,
+        patients[i].ethnicity,
         patients[i].surname,
         patients[i].title,
         patients[i].email,
