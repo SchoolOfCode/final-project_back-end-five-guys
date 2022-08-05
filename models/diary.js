@@ -4,8 +4,11 @@ export async function getDiary() {
   const res = await pool.query('select * from diary');
   return res.rows;
 }
-
 export async function getDiaryById(id) {
+  const res = await pool.query('select * from diary where patient_id=$1', [id]);
+  return res.rows;
+}
+export async function getDiaryForDoctor() {
   const res = await pool.query('select * from diary where patient_id=$1', [id]);
   return res.rows;
 }
