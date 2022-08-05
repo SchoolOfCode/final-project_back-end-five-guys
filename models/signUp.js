@@ -5,17 +5,17 @@ export async function getSignUps() {
   return res.rows;
 }
 
-export async function newSignUp(id) {
+export async function newSignUp(id, patient_id) {
   const res = await pool.query(
-    'insert into signup (id,patient_email,used) values ($1,$2,$3) returning *',
-    [id, '', false]
+    'insert into signup (code,patient_email,used,patient_id) values ($1,$2,$3,$4) returning *',
+    [id, '', false, patient_id]
   );
   return res.rows;
 }
 
 export async function linkSignUp(email, id) {
   const checkRes = await pool.query(
-    'select * from signup where id=$1 AND used=false',
+    'select * from signup where code=$1 AND used=false',
     [id]
   );
   console.log('checkRes:', checkRes);

@@ -1,4 +1,5 @@
 import express from "express";
+import { v4 as uuidv4 } from "uuid";
 import {
   getDiary,
   getDiaryById,
@@ -11,6 +12,7 @@ import {
   makeAllergy,
 } from "../models/allergy.js";
 import { getSignUps, newSignUp, linkSignUp } from "../models/signUp.js";
+
 import {
   createPatient,
   getPatients,
@@ -80,14 +82,22 @@ router.post("/patients", async function (req, res, next) {
   if (req.query.doctoremail) {
     console.log("email given for post for new patient");
     const newPatient = await createPatient(req.body);
-    console.log(newPatient);
+    console.log("new pat", newPatient);
+    let registerID = uuidv4().split("-")[0];
+    const signUp = await newSignUp(registerID, newPatient[0].patient_id);
+    console.log("sign up", signUp);
     const doctorID = await getDoctorByEmail(req.query.doctoremail);
     console.log(doctorID);
     const addedPatient = await addPatientToDoctorList(
       doctorID[0].doctor_id,
       newPatient[0].patient_id
     );
-    return res.json({ success: true, doc: addedPatient, patient: newPatient });
+    return res.json({
+      success: true,
+      doc: addedPatient,
+      patient: newPatient,
+      registrationID: signUp,
+    });
   }
   res.json({ success: false, data: {} });
 });
