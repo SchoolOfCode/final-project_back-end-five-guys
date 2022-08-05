@@ -16,6 +16,7 @@ import { getSignUps, newSignUp, linkSignUp } from '../models/signUp.js';
 
 import {
   createPatient,
+  getPatientByEmail,
   getPatients,
   getPatientsByDoctor,
 } from '../models/patient.js';
@@ -125,6 +126,12 @@ router.post('/prescriptions/:id', async function (req, res, next) {
   console.log('posting prescription', req.body);
   const response = await makePrescription(Number(req.params.id), req.body);
   res.json({ success: true, data: response });
+});
+router.get('/patient', async function (req, res, next) {
+  if (req.query.email) {
+    const response = await getPatientByEmail(req.query.email);
+    res.json({ success: true, data: response });
+  }
 });
 
 export default router;
