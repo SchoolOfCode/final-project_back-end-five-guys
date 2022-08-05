@@ -1,12 +1,18 @@
 import express from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import { getDiary, getDiaryById, newDiaryEntry } from '../models/diary.js';
+import {
+  getDiary,
+  getDiaryById,
+  newDiaryEntry,
+  getDiaryByEmail,
+} from '../models/diary.js';
 import {
   getAllergies,
   getAllergiesById,
   makeAllergy,
 } from '../models/allergy.js';
 import { getSignUps, newSignUp, linkSignUp } from '../models/signUp.js';
+
 import {
   createPatient,
   getPatients,
@@ -30,19 +36,20 @@ router.get('/diary', async function (req, res, next) {
     const response = await getDiaryForDoctor(email);
     return res.json({ success: true, data: response });
   }
+
   const response = await getDiary();
   res.json({ success: true, data: response });
 });
 
 //get all diary entries for a specific patient
-router.get('/diary/:id', async function (req, res, next) {
-  const response = await getDiaryById(Number(req.params.id));
+router.get('/diary/:email', async function (req, res, next) {
+  const response = await getDiaryByEmail(req.params.email);
   return res.json({ success: true, data: response });
 });
 
 // add diary entry for patient
-router.post('/diary/:id', async function (req, res, next) {
-  const response = await newDiaryEntry(Number(req.params.id), req.body);
+router.post('/diary/:email', async function (req, res, next) {
+  const response = await newDiaryEntry(req.params.email, req.body);
   return res.json({ success: true, data: response });
 });
 
