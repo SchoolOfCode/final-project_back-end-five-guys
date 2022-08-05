@@ -26,6 +26,10 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/diary', async function (req, res, next) {
+  if (req.query.doctoremail !== undefined) {
+    const response = await getDiaryForDoctor(email);
+    return res.json({ success: true, data: response });
+  }
   const response = await getDiary();
   res.json({ success: true, data: response });
 });
