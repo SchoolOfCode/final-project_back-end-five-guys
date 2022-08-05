@@ -21,6 +21,7 @@ import {
   getPatientsByDoctor,
 } from '../models/patient.js';
 import {
+  getPrescriptionsByEmail,
   getPrescriptionsById,
   makePrescription,
 } from '../models/prescription.js';
@@ -121,6 +122,13 @@ router.post('/patients', async function (req, res, next) {
 router.get('/prescriptions/:id', async function (req, res, next) {
   const response = await getPrescriptionsById(Number(req.params.id));
   res.json({ success: true, data: response });
+});
+router.get('/prescriptions', async function (req, res, next) {
+  if (req.query.email) {
+    const response = await getPrescriptionsByEmail(req.query.email);
+    console.log('getting pres', response);
+    return res.json({ success: true, data: response });
+  }
 });
 router.post('/prescriptions/:id', async function (req, res, next) {
   console.log('posting prescription', req.body);

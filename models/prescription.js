@@ -11,6 +11,13 @@ export async function getPrescriptionsById(id) {
   );
   return res.rows;
 }
+export async function getPrescriptionsByEmail(email) {
+  const res = await pool.query(
+    'select * from prescription where patient_id=(select patient_id from patient where email=$1)',
+    [email]
+  );
+  return res.rows;
+}
 export async function pausePrescription(pres_id) {
   const res = await pool.query(
     'update prescription set active=$1 where prescription_id = $2 returning *',
