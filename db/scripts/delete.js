@@ -7,4 +7,4 @@ async function deleteTable(tableName) {
 
 //REMEMBER TO PUT TABLE NAME OF THE TABLE YOU WANT TO DELETE AS ARGUMENT TO THE FUNCTION BELOW, BEFORE RUNNING THE SCRIPT ⚠⚠⚠
 
-deleteTable('');
+deleteTable('signUp');

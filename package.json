@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "create": "node ./db/scripts/create.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "delete": "node ./db/scripts/delete.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
