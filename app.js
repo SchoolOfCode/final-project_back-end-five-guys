@@ -1,28 +1,28 @@
-import createError from "http-errors";
-import path from "path";
-import cookieParser from "cookie-parser";
-import logger from "morgan";
-import * as url from "url";
-import indexRouter from "./routes/index.js";
-import usersRouter from "./routes/users.js";
+import createError from 'http-errors';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import * as url from 'url';
+import indexRouter from './routes/index.js';
+import usersRouter from './routes/users.js';
 
-import express from "express";
-import cors from "cors";
+import express from 'express';
+import cors from 'cors';
 const app = express();
 const PORT = 3001;
 // app.use('/', indexRouter);
 
 app.use(cors());
-app.use(logger("dev"));
+app.use(logger('dev'));
 
 app.use(express.json());
-app.use("/", usersRouter);
-app.listen(PORT);
+app.use('/', usersRouter);
+// app.listen(PORT);
 
-app.get("/users/:id", (req, res) => {
+app.get('/users/:id', (req, res) => {
   //payload will be query on all of the notes of the user based on req.params.id
   //pool.query('Select * from notes join profile on notes.userID=profile.userID')
-  res.json({ sucess: true, payload: "you wish" });
+  res.json({ sucess: true, payload: 'you wish' });
 });
 
 export default app;
