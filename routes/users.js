@@ -130,6 +130,7 @@ router.get('/prescriptions', async function (req, res, next) {
     console.log('getting pres', response);
     return res.json({ success: true, data: response });
   }
+  res.json({ success: false, data: {} });
 });
 router.post('/prescriptions/:id', async function (req, res, next) {
   console.log('posting prescription', req.body);
