@@ -30,6 +30,7 @@ import {
   getDoctorById,
   addPatientToDoctorList,
 } from '../models/doctor.js';
+import { getPending } from '../models/pending.js';
 const router = express.Router();
 
 /* GET users listing. */
@@ -140,6 +141,12 @@ router.get('/patient', async function (req, res, next) {
     const response = await getPatientByEmail(req.query.email);
     res.json({ success: true, data: response });
   }
+});
+
+//routes for pending prescriptions
+router.get('/pending', async function (req, req, next) {
+  const response = await getPending();
+  res.json({ success: true, data: response });
 });
 
 export default router;
