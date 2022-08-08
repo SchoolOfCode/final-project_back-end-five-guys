@@ -30,7 +30,7 @@ import {
   getDoctorById,
   addPatientToDoctorList,
 } from '../models/doctor.js';
-import { getPending } from '../models/pending.js';
+import { deletePending, getPending } from '../models/pending.js';
 const router = express.Router();
 
 /* GET users listing. */
@@ -136,6 +136,7 @@ router.post('/prescriptions/:id', async function (req, res, next) {
   const response = await makePrescription(Number(req.params.id), req.body);
   res.json({ success: true, data: response });
 });
+
 router.get('/patient', async function (req, res, next) {
   if (req.query.email) {
     const response = await getPatientByEmail(req.query.email);
@@ -149,4 +150,8 @@ router.get('/pending', async function (req, res, next) {
   res.json({ success: true, data: response });
 });
 
+router.delete('/pending/:id', async function (req, res, next) {
+  const response = await deletePending(Number(req.params.id));
+  res.json({ success: true, data: response });
+});
 export default router;

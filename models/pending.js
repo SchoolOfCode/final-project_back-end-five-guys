@@ -7,3 +7,11 @@ export async function getPending() {
   );
   return res.rows;
 }
+
+export async function deletePending(id) {
+  const res = await pool.query(
+    'delete FROM pending where pending_id=$1 returning *',
+    [id]
+  );
+  return res.rows;
+}
