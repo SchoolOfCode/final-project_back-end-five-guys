@@ -144,7 +144,7 @@ router.get('/patient', async function (req, res, next) {
 });
 
 //routes for pending prescriptions
-router.get('/pending', async function (req, req, next) {
+router.get('/pending', async function (req, res, next) {
   const response = await getPending();
   res.json({ success: true, data: response });
 });
