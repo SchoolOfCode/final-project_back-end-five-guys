@@ -21,3 +21,10 @@ await pool.query(
 await pool.query(
   'Create table if not exists patient (patient_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, firstName text, surname TEXT, title TEXT, address TEXT, pregnant BOOLEAN, dob TEXT, gender TEXT, gpSurgery TEXT, nhsNumber TEXT, phoneNumber TEXT, postcode TEXT, email TEXT, prepaid TEXT, weight NUMERIC, ethnicity TEXT); '
 );
+
+await pool.query(
+  'Create table if not exists otc (otc_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, patient_id int, name TEXT, reason TEXT);'
+);
+await pool.query(
+  'Create table if not exists pending (pending_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY, patient_id int, name TEXT, reason TEXT, total NUMERIC, frequency TEXT, dosage NUMERIC, date TEXT, measurement TEXT, monitoring BOOLEAN, monitoringSchedule NUMERIC, monitoringFrequency TEXT, override TEXT, quantity NUMERIC, type TEXT, status TEXT);'
+);
