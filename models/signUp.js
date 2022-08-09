@@ -8,6 +8,12 @@ export async function matchesSignUp(code) {
   const res = await pool.query('Select * from signup where code=$1', [code]);
   return res.rows;
 }
+export async function useSignUp(code) {
+  const res = await pool.query('update signup set used=true where code=$1', [
+    code,
+  ]);
+  return res.rows;
+}
 export async function newSignUp(id, patient_id) {
   const res = await pool.query(
     'insert into signup (code,patient_email,used,patient_id) values ($1,$2,$3,$4) returning *',
@@ -16,7 +22,7 @@ export async function newSignUp(id, patient_id) {
   return res.rows;
 }
 
-export async function linkSignUp(email, id) {
+export async function linkSignUp(id) {
   const checkRes = await pool.query(
     'select * from signup where code=$1 AND used=false',
     [id]

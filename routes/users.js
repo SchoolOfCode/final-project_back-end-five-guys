@@ -17,6 +17,7 @@ import {
   newSignUp,
   linkSignUp,
   matchesSignUp,
+  useSignUp,
 } from '../models/signUp.js';
 
 import {
@@ -90,13 +91,20 @@ router.post('/allergy/:email', async function (req, res, next) {
 
 router.get('/signup', async function (req, res, next) {
   if (req.query.code) {
-    const response = await matchesSignUp(req.query.code);
+    const response = await linkSignUp(req.query.code);
     return res.json({ success: true, data: response });
   }
   const response = await getSignUps();
   res.json({ success: true, data: response });
 });
-
+router.put('/signup', async function (req, res, next) {
+  if (req.query.code) {
+    const response = await useSignUp(req.query.code);
+    return res.json({ success: true, data: response });
+  }
+  const response = await getSignUps();
+  res.json({ success: true, data: response });
+});
 router.get('/doctor', async function (req, res, next) {
   if (req.query.email) {
     const response = await getDoctorByEmail(req.query.email);
