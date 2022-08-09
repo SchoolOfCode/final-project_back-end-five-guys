@@ -87,6 +87,14 @@ router.get('/signup', async function (req, res, next) {
   const response = await getSignUps();
   res.json({ success: true, data: response });
 });
+router.get('/doctor', async function (req, res, next) {
+  if (req.query.email) {
+    const response = await getDoctorByEmail(req.query.email);
+    return res.json({ success: true, data: response });
+  }
+
+  res.json({ success: false, data: 'no email provided' });
+});
 router.get('/patients', async function (req, res, next) {
   if (req.query.doctoremail !== undefined) {
     console.log('doc email provided');
