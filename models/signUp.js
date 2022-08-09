@@ -9,9 +9,10 @@ export async function matchesSignUp(code) {
   return res.rows;
 }
 export async function useSignUp(code) {
-  const res = await pool.query('update signup set used=true where code=$1', [
-    code,
-  ]);
+  const res = await pool.query(
+    'update signup set used=true where code=$1 returning *',
+    [code]
+  );
   return res.rows;
 }
 export async function newSignUp(id, patient_id) {
