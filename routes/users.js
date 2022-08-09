@@ -25,6 +25,7 @@ import {
   getPatientByEmail,
   getPatients,
   getPatientsByDoctor,
+  linkPatient,
 } from '../models/patient.js';
 import {
   getPrescriptionsByEmail,
@@ -121,6 +122,13 @@ router.get('/patients', async function (req, res, next) {
   }
   const response = await getPatients();
   res.json({ success: true, data: response });
+});
+router.put('/patients', async function (req, res, next) {
+  if (req.query.id !== undefined && req.query.email !== undefined) {
+    const response = await linkPatient(req.query.email, req.query.id);
+    return res.json({ success: true, data: response });
+  }
+  res.json({ success: false, data: 'not a valid ID' });
 });
 
 router.post('/patients', async function (req, res, next) {

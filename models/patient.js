@@ -24,6 +24,17 @@ export async function getPatientByEmail(email) {
   console.log(res.rows);
   return res.rows;
 }
+export async function linkPatient(email, id) {
+  const res2 = await pool.query(
+    'update patient set email = $1 where patient_id=$2',
+    [email, id]
+  );
+  const res = await pool.query(
+    'update signup set email = $1 where patient_id=$2',
+    [email, id]
+  );
+  return { signup: res.rows, patient: res2.rows };
+}
 
 //gets all details for a certain patient by id
 export async function getPatientById(patient_id) {
