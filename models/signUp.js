@@ -28,7 +28,7 @@ export async function linkSignUp(id) {
     'select * from signup where code=$1 AND used=false',
     [id]
   );
-  console.log('checkRes:', checkRes);
+  return res.rows;
   //Need to check if there is a valid result in checkRes, and if there was (ie: returns a row with the email='', then need to insert the email into the blank spot with a 2nd query)
   //Otherwise, need to give back an error.
 }
