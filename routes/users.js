@@ -125,7 +125,7 @@ router.get('/patients', async function (req, res, next) {
 });
 router.put('/patients', async function (req, res, next) {
   if (req.query.id !== undefined && req.query.email !== undefined) {
-    const response = await linkPatient(req.query.email, req.query.id);
+    const response = await linkPatient(req.query.email, Number(req.query.id));
     return res.json({ success: true, data: response });
   }
   res.json({ success: false, data: 'not a valid ID' });
