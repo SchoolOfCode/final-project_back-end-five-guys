@@ -24,7 +24,7 @@ export async function newSignUp(id, patient_id) {
 }
 
 export async function linkSignUp(id) {
-  const checkRes = await pool.query(
+  const res = await pool.query(
     'select * from signup where code=$1 AND used=false',
     [id]
   );
