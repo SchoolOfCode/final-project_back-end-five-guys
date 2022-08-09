@@ -12,7 +12,12 @@ import {
   makeAllergy,
   getAllergiesByEmail,
 } from '../models/allergy.js';
-import { getSignUps, newSignUp, linkSignUp } from '../models/signUp.js';
+import {
+  getSignUps,
+  newSignUp,
+  linkSignUp,
+  matchesSignUp,
+} from '../models/signUp.js';
 
 import {
   createPatient,
@@ -84,9 +89,14 @@ router.post('/allergy/:email', async function (req, res, next) {
 });
 
 router.get('/signup', async function (req, res, next) {
+  if (req.query.code) {
+    const response = await matchesSignUp(req.query.code);
+    return res.json({ success: true, data: response });
+  }
   const response = await getSignUps();
   res.json({ success: true, data: response });
 });
+
 router.get('/doctor', async function (req, res, next) {
   if (req.query.email) {
     const response = await getDoctorByEmail(req.query.email);
@@ -151,6 +161,7 @@ router.get('/patient', async function (req, res, next) {
     const response = await getPatientByEmail(req.query.email);
     res.json({ success: true, data: response });
   }
+  res.json({ success: false, data: 'invalid input somehow' });
 });
 
 //routes for pending prescriptions
