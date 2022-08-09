@@ -30,7 +30,7 @@ export async function linkPatient(email, id) {
     [email, id]
   );
   const res = await pool.query(
-    'update signup set email = $1 where patient_id=$2',
+    'update signup set patient_email = $1 where patient_id=$2',
     [email, id]
   );
   return { signup: res.rows, patient: res2.rows };
