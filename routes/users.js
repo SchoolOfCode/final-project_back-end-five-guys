@@ -46,10 +46,9 @@ const router = express.Router();
 router.get('/', function (req, res, next) {
   res.send('Home page not in use');
 });
-router.post('/otc/:email', function (req, res, next) {
-  const response = await registerOTC(req.params.email, req.body)
+router.post('/otc/:email', async function (req, res, next) {
+  const response = await registerOTC(req.params.email, req.body);
   res.json({ success: true, data: response });
-  
 });
 router.get('/diary/:id', async function (req, res, next) {
   if (req.params.id) {
