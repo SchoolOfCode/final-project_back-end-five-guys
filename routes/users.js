@@ -39,13 +39,18 @@ import {
   addPatientToDoctorList,
 } from '../models/doctor.js';
 import { deletePending, getPending } from '../models/pending.js';
+import { registerOTC } from '../models/otc.js';
 const router = express.Router();
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   res.send('Home page not in use');
 });
-
+router.post('/otc/:email', function (req, res, next) {
+  const response = await registerOTC(req.params.email, req.body)
+  res.json({ success: true, data: response });
+  
+});
 router.get('/diary/:id', async function (req, res, next) {
   if (req.params.id) {
     const response = await getDiaryById(Number(req.params.id));
