@@ -39,7 +39,11 @@ import {
   addPatientToDoctorList,
 } from '../models/doctor.js';
 import { deletePending, getPending } from '../models/pending.js';
-import { getOTCByPatient, registerOTC } from '../models/otc.js';
+import {
+  getOTCForPatient,
+  getOTCForDoctor,
+  registerOTC,
+} from '../models/otc.js';
 const router = express.Router();
 
 /* GET users listing. */
@@ -50,9 +54,13 @@ router.post('/otc/:email', async function (req, res, next) {
   const response = await registerOTC(req.params.email, req.body);
   res.json({ success: true, data: response });
 });
-router.get('/otc/:email', async function (req, res, next) {
-  const response = await getOTCByPatient(req.params.email);
-  res.json({ success: true, data: response });
+router.get('/otc', async function (req, res, next) {
+  if (req.query.id) {
+    const response = await getOTCForDoctor(Number(req.query.id));
+    return res.json({ success: true, data: response });
+  }
+  const response2 = await getOTCForPatient(req.query.email);
+  res.json({ success: true, data: response2 });
 });
 router.get('/diary/:id', async function (req, res, next) {
   if (req.params.id) {

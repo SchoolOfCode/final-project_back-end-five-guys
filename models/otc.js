@@ -4,11 +4,15 @@ export async function getOTC() {
   return res.rows;
 }
 
-export async function getOTCByPatient(email) {
+export async function getOTCForPatient(email) {
   const res = await pool.query(
     'select * from otc where patient_id=(select patient_id from patient where email=$1)',
     [email]
   );
+  return res.rows;
+}
+export async function getOTCForDoctor(id) {
+  const res = await pool.query('select * from otc where patient_id=$1', [id]);
   return res.rows;
 }
 export async function registerOTC(email, obj) {
