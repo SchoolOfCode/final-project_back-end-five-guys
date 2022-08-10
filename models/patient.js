@@ -79,10 +79,10 @@ export async function updatePatientWeight(patient, weight) {
 }
 
 //update patient prepaid date
-export async function updatePatientPrepaid(patient, prepaid) {
+export async function updatePatientPrepaid(email, prepaid) {
   const res = await pool.query(
-    'UPDATE patient SET prepaid = $1 WHERE patient_id = $2 RETURNING*;',
-    [prepaid, patient]
+    'UPDATE patient SET prepaid = $1 WHERE patient_email = $2 RETURNING*;',
+    [prepaid, email]
   );
 
   return res.rows;

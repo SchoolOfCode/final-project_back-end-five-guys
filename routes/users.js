@@ -26,6 +26,7 @@ import {
   getPatients,
   getPatientsByDoctor,
   linkPatient,
+  updatePatientPrepaid,
 } from '../models/patient.js';
 import {
   getPrescriptionsByEmail,
@@ -178,6 +179,11 @@ router.get('/patient', async function (req, res, next) {
     return res.json({ success: true, data: response });
   }
   res.json({ success: false, data: 'invalid input somehow' });
+});
+
+router.patch('/patient/:email', async function (req, res, next) {
+  const response = await updatePatientPrepaid(req.params.email, req.body);
+  return res.json({ success: true, data: response });
 });
 
 //routes for pending prescriptions
