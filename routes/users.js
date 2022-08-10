@@ -187,7 +187,10 @@ router.get('/patient', async function (req, res, next) {
 });
 
 router.patch('/patient/:email', async function (req, res, next) {
-  const response = await updatePatientPrepaid(req.params.email, req.body);
+  const response = await updatePatientPrepaid(
+    req.params.email,
+    req.body.prepaid
+  );
   return res.json({ success: true, data: response });
 });
 
