@@ -4,7 +4,7 @@ export async function getOTC() {
   return res.rows;
 }
 export async function registerOTC(email, obj) {
-  const patient = await pool.query('select * from patients where email=$1', [
+  const patient = await pool.query('select * from patient where email=$1', [
     email,
   ]);
   console.log('heyo, result', patient);
