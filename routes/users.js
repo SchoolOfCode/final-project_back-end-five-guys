@@ -175,10 +175,13 @@ router.post('/patients', async function (req, res, next) {
   res.json({ success: false, data: {} });
 });
 router.get('/prescriptions/:id', async function (req, res, next) {
+  console.log('ID PARAM ROUTE');
   const response = await getPrescriptionsById(Number(req.params.id));
   res.json({ success: true, data: response });
 });
 router.get('/prescriptions', async function (req, res, next) {
+  console.log('EMAIL Q ROUTE');
+
   if (req.query.email) {
     const response = await getPrescriptionsByEmail(req.query.email);
     console.log('getting pres', response);
