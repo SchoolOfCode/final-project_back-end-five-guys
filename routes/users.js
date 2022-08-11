@@ -74,7 +74,7 @@ router.get('/diary/:id', async function (req, res, next) {
 //get all diary entries for a specific patient
 router.get('/diary', async function (req, res, next) {
   if (req.query.email) {
-    const response = await getDiaryByEmail(req.params.email);
+    const response = await getDiaryByEmail(req.query.email);
     return res.json({ success: true, data: response });
   }
   res.json({ success: false, data: 'provide email please' });
