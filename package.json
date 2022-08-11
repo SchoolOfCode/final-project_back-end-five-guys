@@ -6,7 +6,8 @@
     "start": "node ./bin/www",
     "create": "node ./db/scripts/create.js",
     "dev": "nodemon app.js",
-    "delete": "node ./db/scripts/delete.js"
+    "delete": "node ./db/scripts/delete.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -16,9 +17,11 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "jest": "^28.1.3",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.19",
     "pg": "^8.7.3",
+    "supertest": "^6.2.4",
     "uuid": "^8.3.2"
   }
 }

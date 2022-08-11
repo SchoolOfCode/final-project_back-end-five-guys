@@ -100,7 +100,7 @@ export async function deletePatient(patient) {
 //update patient details
 export async function updatePatient(patient) {
   const res = await pool.query(
-    'UPDATE patient SET firstName=$1, surname=$2, title=$3, address=$4, pregnant=$5, dob=$6, gender=$7, gpSurgery=$8, nhsNumber=$9, phoneNumber=$10, postcode=$11, email=$12, weight=$13 RETURNING*;',
+    'UPDATE patient SET firstName=$1, surname=$2, title=$3, address=$4, pregnant=$5, dob=$6, gender=$7, gpSurgery=$8, nhsNumber=$9, phoneNumber=$10, postcode=$11, email=$12, weight=$13, ethnicity=$14 where patient_email =$12 RETURNING*;',
     [
       patient.firstName,
       patient.surname,
@@ -115,6 +115,7 @@ export async function updatePatient(patient) {
       patient.postcode,
       patient.email,
       patient.weight,
+      patient.ethnicity,
     ]
   );
   return res.rows;
