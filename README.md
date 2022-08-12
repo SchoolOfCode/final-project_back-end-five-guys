@@ -1,5 +1,5 @@
 ![Logo](./medi-check.png)
-
+<img src="./medi-check.png" width='200'/>
 # SOC MEDI-CHECK APP BACK-END
 
 ## Intro
