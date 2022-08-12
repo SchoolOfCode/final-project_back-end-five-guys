@@ -34,13 +34,12 @@ The patient side of Medi-Check offers useful functionality for both users and us
 
 ## Back End Tech Stack
 
-- Express Generator
 - Heroku Database
 - Jest
 - Node.js
 - PostgreSQL
 - Supertest
-- Various npm libraries
+- Various npm libraries (Dotenv, Express Generator, Nodemon, PG etc.)
 
 ## Installation
 
@@ -77,8 +76,6 @@ To delete the tables write the table that you want to delete in the delete.js sc
 ```
 
 ## Paths
-
----
 
 Please see the routes/users.js file to see specific routes and their respective functionalities which are imported from the models/ folders.
 
