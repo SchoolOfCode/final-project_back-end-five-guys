@@ -119,13 +119,9 @@ router.get('/signup', async function (req, res, next) {
   const response = await getSignUps();
   res.json({ success: true, data: response });
 });
-router.get('/signup/:email', async function (req, res, next) {
-  if (req.query.code) {
-    const response = await getCode(req.params.email);
-    return res.json({ success: true, data: response });
-  }
-  const response = await getSignUps();
-  res.json({ success: true, data: response });
+router.get('/signup/patient/:id', async function (req, res, next) {
+  const response = await getCode(Number(req.params.id));
+  return res.json({ success: true, data: response });
 });
 router.put('/signup', async function (req, res, next) {
   if (req.query.code) {
