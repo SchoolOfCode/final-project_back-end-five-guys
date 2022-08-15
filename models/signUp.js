@@ -4,6 +4,13 @@ export async function getSignUps() {
   const res = await pool.query('Select * from signup');
   return res.rows;
 }
+export async function getCode(email) {
+  const res = await pool.query(
+    'Select code from signup where patient_id=(select patient_id from patient where email=$1)',
+    [email]
+  );
+  return res.rows;
+}
 export async function matchesSignUp(code) {
   const res = await pool.query('Select * from signup where code=$1', [code]);
   return res.rows;
